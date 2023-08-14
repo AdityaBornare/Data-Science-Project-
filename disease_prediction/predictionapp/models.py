@@ -1,6 +1,6 @@
 from django.db import models
 import pandas as pd
-import requests, operator, os
+import requests, operator, os, warnings
 from bs4 import BeautifulSoup
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import RegexpTokenizer
@@ -12,6 +12,8 @@ from sklearn.model_selection import cross_val_score
 from statistics import mean
 
 # Create your models here.
+
+warnings.simplefilter("ignore")
 
 lemmatizer = WordNetLemmatizer()
 splitter = RegexpTokenizer(r'\w+')
@@ -171,3 +173,4 @@ def predict_diseases(final_symp):
     fp.close()
 
     return diseases_list
+

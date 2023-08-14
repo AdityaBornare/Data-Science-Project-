@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django import forms
 from django.urls import reverse
-from nltk.lm import counter
 
 from . import models
 
@@ -97,14 +96,13 @@ def co_occurring(request):
         if form.is_valid():
             cooccur = form.cleaned_data["cooccur"]
             select_list = cooccur.lower().split(",")
-            global found_symptoms
             global counter_list
             global final_symptoms
             if select_list[0] == "no":
                 pass
             else:
                 for idx in select_list:
-                    final_symptoms.append(found_symptoms[int(idx)])
+                    final_symptoms.append(counter_list[int(idx)])
             # Predict the disease
             diseases_list = models.predict_diseases(final_symptoms)
 
